@@ -1,0 +1,44 @@
+info (
+	title:       "User API"
+	version:     "1.0.0"
+	description: "API for managing users"
+	author:      "Geralt Wong"
+)
+
+type RegisterReq {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type RegisterResp {
+	Id    int64  `json:"id"`
+	Token string `json:"token"`
+}
+
+type LoginReq {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginResp {
+	Id    int64  `json:"id"`
+	Token string `json:"token"`
+}
+
+type UserInfoResp {
+	Id    int64  `json:"id"`
+	Email string `json:"email"`
+	Role  string `json:"role"`
+}
+
+service user {
+	@handler register
+	post /api/user/register (RegisterReq) returns (RegisterResp)
+
+	@handler login
+	post /api/user/login (LoginReq) returns (LoginResp)
+
+	@handler getUserInfo
+	get /api/user/info returns (UserInfoResp)
+}
+
