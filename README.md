@@ -22,7 +22,7 @@
 
 ### services 的使用
 
-对于 `go-zero` 没办法直接使用的 Service （如 `Milvus`、`redis` 等），本项目则将相应的集成在 `./services` 中，各个微服务自行使用
+对于 `go-zero` 没办法直接使用的 Service （如 `Milvus` 等），本项目则将相应的集成在 `./services` 中，各个微服务自行使用
 
 ### pkg 的使用
 
