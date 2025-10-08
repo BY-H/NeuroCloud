@@ -1,0 +1,60 @@
+info (
+	title:       "Auth API"
+	version:     "1.0.0"
+	description: "API for authentication"
+	author:      "Geralt Wong"
+)
+
+type (
+	// 用户登录请求
+	LoginReq {
+		Email    string `json:"email" validate:"required,email"`
+		Password string `json:"password" validate:"required"`
+	}
+	// 登录响应：包含 AccessToken 与 RefreshToken
+	LoginResp {
+		AccessToken  string `json:"accessToken"`
+		RefreshToken string `json:"refreshToken"`
+		ExpireAt     int64  `json:"expireAt"`
+	}
+	// 刷新 token 请求
+	RefreshReq {
+		RefreshToken string `json:"refreshToken" validate:"required"`
+	}
+	// 刷新响应
+	RefreshResp {
+		AccessToken  string `json:"accessToken"`
+		RefreshToken string `json:"refreshToken"`
+		ExpireAt     int64  `json:"expireAt"`
+	}
+	// 验证 token 请求（给前端调试或内部测试用）
+	VerifyReq {
+		Token string `json:"token" validate:"required"`
+	}
+	// 验证 token 响应
+	VerifyResp {
+		Valid   bool   `json:"valid"`
+		UserId  string `json:"userId,optional"`
+		Email   string `json:"email,optional"`
+		Message string `json:"message,optional"`
+	}
+)
+
+@server (
+	prefix: /api/auth
+	group:  auth
+)
+service auth-api {
+	@doc "用户登录"
+	@handler Login
+	post /login (LoginReq) returns (LoginResp)
+
+	@doc "刷新 Token"
+	@handler Refresh
+	post /refresh (RefreshReq) returns (RefreshResp)
+
+	@doc "验证 Token"
+	@handler Verify
+	post /verify (VerifyReq) returns (VerifyResp)
+}
+

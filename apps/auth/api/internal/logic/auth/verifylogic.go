@@ -1,0 +1,31 @@
+package auth
+
+import (
+	"context"
+
+	"neuro-cloud/apps/auth/api/internal/svc"
+	"neuro-cloud/apps/auth/api/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type VerifyLogic struct {
+	logx.Logger
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
+
+// 验证 Token
+func NewVerifyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *VerifyLogic {
+	return &VerifyLogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
+
+func (l *VerifyLogic) Verify(req *types.VerifyReq) (resp *types.VerifyResp, err error) {
+	// todo: add your logic here and delete this line
+
+	return
+}

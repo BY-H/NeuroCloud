@@ -1,0 +1,15 @@
+Name: auth-api
+Host: 0.0.0.0
+Port: 8888
+
+Auth:
+  AccessSecret: "neurocloud-auth-secret"
+  AccessExpire: 3600
+  RefreshExpire: 604800  # 一周
+
+Redis:
+  Host: "127.0.0.1:6379"
+  Type: "node"
+
+UserRpc:
+  Target: "localhost:9000"   # user.rpc 服务地址
